@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	html,body{
+		height: 100%; 
+		margin: 0; 
+		padding: 0;
+	}
+	.verify_css {
+		color : #0000A8;
+		display: flex;
+		width: 600px;
+		height: 100%;
+		margin:0 auto;
+	}
+	.verify_css div {
+		margin:auto;
+	 }
+	 .verify_text_css {
+	 	font-size : 100px;
+/* 	 	font-family:fantasy; */
+	 	font-family:serif;
+	 }
+</style>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.5.0/js/md5.min.js"></script>
+<script type="text/javascript">
+	$.getJSON('https://ipinfo.io/json', function(data) {
+// 	  var ipData = JSON.parse(data);
+	  console.log(data);
+	  console.log(data['ip']);
+	  console.log(md5(data['ip']));
+	  var ip = md5(data['ip']);
+	  var md5_str = ip.substr(ip.length - 4, ip.length);
+	  console.log('md5 = ' + md5_str);
+	  var isMob = isMobile();
+	  console.log('isMobile() = ' + isMob);
+	  if (isMob) {
+		  $('#verify_text').text('M'+md5_str);
+	  } else {
+		  $('#verify_text').text(md5_str);
+	  }
+	});
+	
+	function isMobile() {
+	    var userAgentInfo = navigator.userAgent;
+	    var mobileAgents = [ "Android", "iPhone", "SymbianOS", "Windows Phone", "iPad","iPod"];
+	    var mobile_flag = false;
+	    //根據userAgent判斷是否是手機
+	    for (var v = 0; v < mobileAgents.length; v++) {
+	        if (userAgentInfo.indexOf(mobileAgents[v]) > 0) {
+	            mobile_flag = true;
+	            break;
+	        }
+	    }
+	     var screen_width = window.screen.width;
+	     var screen_height = window.screen.height;    
+	     //根據屏幕分辨率判斷是否是手機
+	     if(screen_width < 500 && screen_height < 800){
+	         mobile_flag = true;
+	     }
+	     return mobile_flag;
+	}
+</script>
+<div id="verify_box" class="verify_css">
+	<div id="verify_text" class="verify_text_css">
+	</div>
+</div>
+</body>
+</html>
