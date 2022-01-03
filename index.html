@@ -54,6 +54,9 @@
 		left: 81%;
 		transform: translate(-50%, -50%);
 	 }
+	 .noselect {
+	 	user-select : none;
+	 }
 </style>
 </head>
 <body>
@@ -110,10 +113,10 @@
 </script>
 <div id="verify_box" class="verify_css">
 	<div id="verify_text" class="verify_text_css">
-		<div id="text" class="text_css"></div>
-		<div id="gline" class="line_css">- - - - - -</div>
-		<div id="gline2" class="line2_css">-------</div>
-		<div id="timestamp" class="timestamp"></div>
+		<div id="text" class="text_css noselect"></div>
+		<div id="gline" class="line_css noselect">- - - - - -</div>
+		<div id="gline2" class="line2_css noselect">-------</div>
+		<div id="timestamp" class="timestamp noselect"></div>
 	</div>
 </div>
 </body>
